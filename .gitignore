@@ -2,3 +2,5 @@
 .DS_Store
 .config_secret
 .idea
+__pycashe__
+*.pyc
