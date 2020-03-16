@@ -10,5 +10,4 @@ class Vegetable(models.Model):
     unit = models.CharField(max_length=100, blank=True, null=True, verbose_name='주요 단위')
     sub_unit = models.CharField(max_length=100, blank=True, null=True, verbose_name='보조 단위')
     sub_unit2 = models.CharField(max_length=100, blank=True, null=True, verbose_name='보조 단위2')
-    
-    
+

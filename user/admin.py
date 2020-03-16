@@ -7,6 +7,7 @@ class MemberAdmin(admin.ModelAdmin):
     fields = [
         'email',
         'name',
+        'password',
         'gender',
         'birthday',
         'phone_num',

@@ -7,7 +7,6 @@ class MemberAdmin(admin.ModelAdmin):
     fields = [
         'customer_name',
         'course_area',
-        'which_day',
         'address',
         'phone',
         'operator',
