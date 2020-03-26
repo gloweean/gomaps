@@ -18,6 +18,7 @@ from django.urls import path, include
 from user.apis import obtain_auth_token, UserLogoutView, UserCreateListView, UserRetrieveUpdateDestroyView
 from customer.apis import MyCustomerListCreateView, MyCustomerRetrieveUpdateDestroyView
 from vegetable.apis import VegetableListCreateView, VegetableRetrieveUpdateDestroyView
+from order.apis import OrderListCreateView, OrderRetrieveUpdateDestroyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +30,7 @@ urlpatterns = [
     path('api/customer/<int:id>/', MyCustomerRetrieveUpdateDestroyView.as_view()),
     path('api/vegetable/', VegetableListCreateView.as_view()),
     path('api/vegetable/<int:id>/', VegetableRetrieveUpdateDestroyView.as_view()),
+    path('api/order/', OrderListCreateView.as_view()),
+    path('api/order/<int:id>/', OrderRetrieveUpdateDestroyView.as_view()),
 ]
 
