@@ -10,12 +10,13 @@ from rest_framework import permissions
 #             return True
 #         return obj.host == request.user
 
-
 class ObjectIsRequestUser(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj == request.user
+            return obj == request.user
+        else:
+            return False
+        
 
 
 # class IsHolidayHouseOwner(permissions.BasePermission):

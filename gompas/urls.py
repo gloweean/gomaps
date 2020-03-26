@@ -22,6 +22,6 @@ urlpatterns = [
     path('api/user/', UserCreateListView.as_view()),
     path('api/user/login/', obtain_auth_token),
     path('api/user/logout/', UserLogoutView.as_view()),
-    path('api/user/<int:id>', UserRetrieveUpdateDestroyView.as_view()),
+    path('api/user/<int:id>/', UserRetrieveUpdateDestroyView.as_view()),
 ]
 
