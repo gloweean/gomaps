@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from user.apis import obtain_auth_token, UserLogoutView, UserCreateListView, UserRetrieveUpdateDestroyView
 from customer.apis import MyCustomerListCreateView, MyCustomerRetrieveUpdateDestroyView
+from vegetable.apis import VegetableListCreateView, VegetableRetrieveUpdateDestroyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,7 @@ urlpatterns = [
     path('api/user/<int:id>/', UserRetrieveUpdateDestroyView.as_view()),
     path('api/customer/', MyCustomerListCreateView.as_view()),
     path('api/customer/<int:id>/', MyCustomerRetrieveUpdateDestroyView.as_view()),
+    path('api/vegetable/', VegetableListCreateView.as_view()),
+    path('api/vegetable/<int:id>/', VegetableRetrieveUpdateDestroyView.as_view()),
 ]
 
