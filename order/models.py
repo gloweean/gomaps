@@ -17,12 +17,24 @@ class Order(models.Model):
             ('THU', '목'),
             ('FRI', '금'),
         )
+    
+    STATUS_CHOICE = (
+        ('ACCEPTED', '주문접수'),     # 작성 완료 시
+        ('CLOSE', '주문마감'),        # 주문 마감 시간 이후 (수정 안됨)
+        ('CONFIRMED', '관리자승인'),   # 관리자 확인
+    )
+    
     operator = models.ForeignKey(User, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    which_day = models.CharField(max_length=10, choices=DAY_CHOICE, default='코스요일',)
+    which_day = models.CharField(max_length=10, choices=DAY_CHOICE, default='코스요일')
     vegetable_name = models.ForeignKey(Vegetable, on_delete=models.CASCADE)
     order_quantity = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name='주문량')
     order_unit = models.CharField(max_length=100, blank=True, null=True, verbose_name='주문 단위')
+    
+    deliver_date = models.DateField(blank=True, null=True)
+    order_status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='주문접수')
+    create_at = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+    update_at = models.DateTimeField(blank=True, null=True, auto_now=True)
     
     class Meta:
         verbose_name = '주문'
