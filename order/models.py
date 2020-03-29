@@ -24,12 +24,19 @@ class Order(models.Model):
         ('CONFIRMED', '관리자승인'),   # 관리자 확인
     )
     
+    UNIT_CHOICE = (
+        ('CTN', '박스'),
+        ('BAG', '포'),
+        ('KG', '키로'),
+        ('EA', ''),
+    )
+    
     operator = models.ForeignKey(User, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     which_day = models.CharField(max_length=10, choices=DAY_CHOICE, default='코스요일')
     vegetable_name = models.ForeignKey(Vegetable, on_delete=models.CASCADE)
     order_quantity = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name='주문량')
-    order_unit = models.CharField(max_length=100, blank=True, null=True, verbose_name='주문 단위')
+    order_unit = models.CharField(max_length=100, choices=UNIT_CHOICE, default='CTN', verbose_name='주문 단위')
     
     deliver_date = models.DateField(blank=True, null=True)
     order_status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='주문접수')

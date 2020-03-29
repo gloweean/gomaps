@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'vegetable',
     'customer',
     'order',
+    'report',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
