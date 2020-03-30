@@ -30,8 +30,6 @@ class OrderListCreateView(generics.ListCreateAPIView):
     
     def perform_create(self, serializer):
         deliver_date = serializer.validated_data["deliver_date"]
-        last_updated_date = TotalOrder.objects.last().deliver_date
-        
         target_vege_id = serializer._kwargs["data"]["vegetable_name"]
         customer_id = serializer._kwargs["data"]["customer"]
         
