@@ -1,5 +1,6 @@
 from ..serializers.orders import OrderSerializer
-from rest_framework import generics, permissions, authentication
+from rest_framework import generics, permissions, authentication, status
+from rest_framework.response import Response
 from utils.permissions import IsOrderOwner
 from ..models import Order
 from vegetable.models import Vegetable
@@ -195,6 +196,31 @@ class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
                 instance.quantity_ea = existed_value - order_quantity
             instance.save()
             return e
-
-    def perform_destroy(self, instance):
-        instance.delete()
+        
+    def destroy(self, request, *args, **kwargs):
+        # Total Order가 받는 before_order의 영향을 역으로 제거
+        order_id = self.kwargs["id"]
+        before_order = Order.objects.get(id=order_id)
+    
+        deliver_date_before = before_order.deliver_date
+        vege_before = before_order.vegetable_name  # instance
+        quantity_brfore = before_order.order_quantity
+        unit_before = before_order.order_unit
+    
+        instance = TotalOrder.objects.get(vege_name=vege_before, deliver_date=deliver_date_before)
+        if unit_before in ["CTN", ]:
+            existed_value = instance.quantity_ctn
+            instance.quantity_ctn = existed_value - quantity_brfore
+        elif unit_before in ["BAG", ]:
+            existed_value = instance.quantity_bag
+            instance.quantity_bag = existed_value - quantity_brfore
+        elif unit_before in ["KG", ]:
+            existed_value = instance.quantity_kg
+            instance.quantity_kg = existed_value - quantity_brfore
+        else:
+            existed_value = instance.quantity_ea
+            instance.quantity_ea = existed_value - quantity_brfore
+        instance.save()
+    
+        before_order.delete()
+        return Response('id:{} - 주문이 삭제되었습니다.'.format(order_id), status=status.HTTP_204_NO_CONTENT)
