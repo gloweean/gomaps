@@ -2,3 +2,4 @@ django==3.0.4
 mysqlclient==1.4.6
 djangorestframework==3.11.0
 django-filter==2.2.0
+uwsgi==2.0.18
