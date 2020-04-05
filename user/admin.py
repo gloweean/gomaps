@@ -14,9 +14,11 @@ class MemberAdmin(admin.ModelAdmin):
         'phone_num',
         'postal_code',
         'address',
+        'date_joined',
         'is_staff',
     ]
     
     readonly_fields = [
+        'username',
         'date_joined',
     ]
