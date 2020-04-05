@@ -5,6 +5,7 @@ from user.models import User
 @admin.register(User)
 class MemberAdmin(admin.ModelAdmin):
     fields = [
+        'username'
         'email',
         'name',
         'password',
