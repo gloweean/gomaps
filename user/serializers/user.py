@@ -37,6 +37,8 @@ class UserCreateSerializer(serializers.Serializer):
     email = serializers.EmailField()
     name = serializers.CharField(allow_blank=False, allow_null=False)
     store_name = serializers.CharField(allow_blank=False, allow_null=False)
+    phone_number = serializers.CharField(allow_blank=True, allow_null=True)
+    address = serializers.CharField(allow_blank=True, allow_null=True)
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
 
@@ -56,11 +58,16 @@ class UserCreateSerializer(serializers.Serializer):
         store_name = self.validated_data.get('store_name', '')
         email = self.validated_data.get('email', '')
         password = self.validated_data.get('password1', '')
+        phone_number = self.validated_data.get('password1', '')
+        address = self.validated_data.get('password1', '')
+
         user = User.object.create_user(
             username=username,
             name=name,
             store_name=store_name,
             email=email,
             password=password,
+            phone_number=phone_number,
+            address=address,
         )
         return user
