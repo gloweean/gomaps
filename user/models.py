@@ -37,7 +37,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('OTHER', '기타'),
     )
     username = models.CharField(unique=True, max_length=100, blank=True, null=True, verbose_name='ID')
-    name = models.CharField(max_length=100, blank=True, null=True, verbose_name='실명')
+    store_name = models.CharField(max_length=100, blank=True, null=True, verbose_name='사업장 이름')
+    name = models.CharField(max_length=100, blank=True, null=True, verbose_name='사용자명')
     email = models.EmailField(unique=True, blank=False, null=False)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICE, default='OTHER', )
     birthday = models.DateField(blank=True, null=True)
